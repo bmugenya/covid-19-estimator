@@ -1,0 +1,66 @@
+{% extends "main.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+    <div class="col-sm-4">
+    <div class="panel panel-primary">
+         <div class="panel-heading">DATA</div>
+    <div class="panel-body"><span>NAME: <strong>{{data.region.name}}</strong></span></div>
+    <div class="panel-body"><span>AVGAGE: <strong>{{data.region.avgAge}}</strong></span></div>
+      <div class="panel-body"><span>AVGDAILYINCOMEINUSD: <strong>{{data.region.avgDailyIncomeInUSD}}</strong></span></div>
+        <div class="panel-body"><span>AVGDAILYINCOMEPOPULATION: <strong>{{data.region.avgDailyIncomePopulation}}</strong></span></div>
+          <div class="panel-body"><span>PERIODTYPE: <strong>{{data.periodType}}</strong></span></div>
+            <div class="panel-body"><span>TIMETOELAPSE: <strong>{{data.timeToElapse}}</strong></span></div>
+              <div class="panel-body"><span>REPORTEDCASES: <strong>{{data.reportedCases}}</strong></span></div>
+                <div class="panel-body"><span>POPULATION: <strong>{{data.population}}</strong></span></div>
+                     <div class="panel-body"><span>TOTALHOSPITALBEDS: <strong>{{data.totalHospitalBeds}}</strong></span></div>
+                 </div>
+             </div>
+                    <div class="col-sm-4">
+                            <div class="panel panel-warning">
+         <div class="panel-heading">IMPACT</div>
+
+
+
+            <div class="panel-body"><span>CURRENTLYINFECTED: <strong>{{impact.currentlyInfected}}</strong></span></div>
+              <div class="panel-body"><span>INFECTIONSBYREQUESTEDTINE: <strong>{{impact.infectionsByRequestedTime}}</strong></span></div>
+              <div class="panel-body"><span>DOLLARSINFLIGHT: <strong>{{impact.dollarsInFlight}} USD</strong></span></div>
+          </div>
+
+                            <div class="panel panel-danger">
+         <div class="panel-heading">SEVERE IMPACT</div>
+
+                <div class="panel-body"><span>SEVEREIMPACT: <strong>{{sever.currentlyInfected}}</strong></span></div>
+              <div class="panel-body"><span>SEVERCASESBYREQUESTEDTIME: <strong>{{sever.severCasesByRequestedTime}}</strong></span></div>
+                  <div class="panel-body"><span>HOSPITALBEDSBYREUESTEDTIME: <strong>{{sever.hospitalBedsByRequestedTime}}</strong></span></div>
+                <div class="panel-body"><span>CASESFORICUBYREQUESTEDTIME: <strong>{{sever.casesForICUByRequestedTime}}</strong></span></div>
+                <div class="panel-body"><span>CASESFORVENTILATORSBYREQUESTEDTIME: <strong>{{sever.casesForVentilatorsByRequestedTime}}</strong></span></div>
+                 <div class="panel-body"><span>DOLLARSINFLIGHT: <strong>{{sever.dollarsInFlight}} USD</strong></span></div>
+
+
+</div>
+</div>
+
+         <div class="col-sm-4">
+                            <div class="panel panel-success">
+         <div class="panel-heading">SAFE GUARD</div>
+<div class="panel-body" style="padding:0;margin:0;=">
+    <img style="width:100%;padding:0;margin:0;" src="/static/img/info.png"/></div>
+
+
+     </div>
+ </div>
+
+
+</div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+

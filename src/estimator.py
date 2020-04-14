@@ -1,33 +1,61 @@
-def impact(reportedCases):
-    currentlyInfected = reportedCases * 10
-    infectionsByRequestedTime = currentlyInfected * (2**10)
+def estimator(data):
+    name = data['region']['name']
+    avgAge= data['region']['avgAge']
+    avgDailyIncomeInUSD = data['region']['avgDailyIncomeInUSD']
+    avgDailyIncomePopulation = data['region']['avgDailyIncomePopulation']
+    periodtype = data['periodType']
+    timeToElapse = data['timeToElapse']
+    population = data['population']
+    reportedCases = data['reportedCases']
+    totalHospitalbeds = data['totalHospitalBeds']
 
-    impact =  {
+    impactt = impact(reportedCases, periodtype,avgDailyIncomePopulation,population)
+    severe = severeImpact(reportedCases,periodtype,totalHospitalbeds,avgDailyIncomePopulation,population)
+    return {"data":data,"impact":impactt,"severeImpact":severe}
+
+
+
+def duration(periodtype):
+    if periodtype == 'days':
+      days =  1
+    elif periodtype == 'weeks':
+      days = 7
+    elif periodtype == 'months':
+      days = 30
+    return days
+
+
+def impact(reportedCases, periodtype,avgDailyIncomePopulation,population):
+    currentlyInfected = reportedCases * 10
+    factor = duration(periodtype) // 3
+    infectionsByRequestedTime = currentlyInfected * (2**factor)
+    region = (currentlyInfected / population) * 100
+
+    return  {
         "currentlyInfected" :  currentlyInfected,
         "infectionsByRequestedTime" : infectionsByRequestedTime,
-       "dollarsInFlight ": (infectionsByRequestedTime * 0.65 ) * 1.5 * 30
+         "dollarsInFlight": (infectionsByRequestedTime * region ) * avgDailyIncomePopulation *  duration(periodtype)
 
+}
+
+def severeImpact(reportedCases,periodtype,totalHospitalbeds,avgDailyIncomePopulation,population):
+    currentlyInfected = reportedCases * 50
+    factor = duration(periodtype) // 3
+    infectionsByRequestedTime = currentlyInfected * (2**factor)
+    severCasesByRequestedTime = infectionsByRequestedTime * (15 / 100)
+    totalHospitalbeds = totalHospitalbeds * (35 / 100)
+    region = (currentlyInfected / population) * 100
+
+    return  {
+        "currentlyInfected" : currentlyInfected,
+        "severCasesByRequestedTime"  : int(severCasesByRequestedTime),
+        "hospitalBedsByRequestedTime" : int(totalHospitalbeds - severCasesByRequestedTime),
+        "casesForICUByRequestedTime": int(infectionsByRequestedTime * (5 / 100)),
+        "casesForVentilatorsByRequestedTime": int(infectionsByRequestedTime * (2 / 100)),
+        "dollarsInFlight": (infectionsByRequestedTime * region ) * avgDailyIncomePopulation *  duration(periodtype)
     }
-    return impact
-
-def serverImpact(reportedCases,totalHospitalbeds):
-
-    severeImpact = reportedCases * 50
-    infectionsByRequestedTime = severeImpact  * (2**10)
-
-    sever =  {
-        "severeImpact" : severeImpact,
-        "severCasesByRequestedTime"  : infectionsByRequestedTime * (100 / 15),
-        "hospitalBedsByRequestedTime" : totalHospitalbeds * (95 / 35),
-        "casesForICUByRequestedTime": infectionsByRequestedTime * (100 / 5),
-        "casesForVentilatorsByRequestedTime": infectionsByRequestedTime * (100 / 2),
-        "dollarsInFlight": (infectionsByRequestedTime * 0.65 ) * 1.5 * 30
-    }
-
-    return sever
 
 
-def estimator(reportedCases,totalHospitalbeds):
-    impactt = impact(reportedCases)
-    sever = serverImpact(reportedCases,totalHospitalbeds)
-    return impactt,sever
+
+
+

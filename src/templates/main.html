@@ -1,0 +1,158 @@
+<html>
+<head>
+      <meta charset="utf-8">
+    <title>COVID19</title>
+    <meta name="description" content="COVID19">
+    <meta name="author" content="Brian Mugenya">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+    <link href="{{ url_for('static', path='css/bootstrap.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static', path='js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', path='js/bootstrap.js') }}"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">#BuildForSDG</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="mark navbar-btn" data-toggle="modal" data-target="#estimate"><a>Estimate</a></li>
+    </ul>
+  </div>
+</nav>
+<body>
+{% block content %}{% endblock %}
+
+
+<!-- Modal -->
+<div id="estimate" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">COVID-19 INFECTION ESTIMATOR</h4>
+      </div>
+      <div class="modal-body">
+
+        <form action="{{ url_for('addReport') }}" method="post" encode="application/x-www-form-urlencoded">
+
+  <div class="form-group col-sm-6">
+    <label for="population">Population</label>
+    <input name="population" data-population type="number" class="form-control" id="population" required>
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="time">Time To Elapse</label>
+    <input name="timeToElapse" data-time-to-elapse type="number" class="form-control" id="time" required>
+  </div>
+
+    <div class="form-group col-sm-6">
+    <label for="report">Reported Cases</label>
+    <input name="reportedCases" data-reported-cases type="number" class="form-control" id="report" required>
+  </div>
+
+  <div class="form-group col-sm-6">
+    <label for="bed">Total Hospital Beds</label>
+    <input name="totalHospitalBeds" data-total-hospital-bedstype="number" class="form-control" id="bed" required>
+  </div>
+
+
+<div class="form-group">
+  <label for="period">Period Type</label>
+  <select name="periodType" data-period-type class="form-control" id="period" required>
+    <option  value="days" days>days</option>
+    <option value="weeks" >weeks</option>
+    <option value="months" >months</option>
+  </select>
+</div>
+
+  <button data-go-estimate type="submit" class="btn btn-default center-block">Submit</button>
+</form>
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+    <!-- Footer -->
+    <footer class="page-footer font-small navbar-inverse" >
+      <div class="container text-center text-md-left mt-5">
+
+
+
+
+              <!-- Grid column -->
+          <div class="col-md-4">
+
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Contact</h6>
+            <hr style="width: 60px;">
+            <p>
+              <i class="fas fa-home mr-3"></i> Rongai Kenya</p>
+            <p>
+              <i class="fas fa-envelope mr-3"></i>email@gmail.com</p>
+            <p>
+              <i class="fas fa-phone mr-3"></i> +254 700 000 00</p>
+            <p>
+
+
+          </div>
+
+          <div class="col-md-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Modules</h6>
+            <hr style="width: 60px;">
+
+            <p>
+              <a href="#!">COVID-19 ESTIMATOR</a>
+            </p>
+
+
+
+
+          </div>
+
+          <!-- Grid column -->
+
+
+    <!-- Grid column -->
+          <div class="col-md-4">
+            <!-- Content -->
+            <h6 class="text-uppercase font-weight-bold">Problem</h6>
+            <hr style="width: 60px;">
+            <p>Too many patients, not enough hospitals and beds. A serious shortage of ventilators, masks
+and other PPE if we donʼt practice extreme social distancing.</p>
+<p>Job losses or freezes, low cash flow and low production of essentials like food, from too
+many being sick or people caring for their sick loved ones.</p>
+
+          </div>
+          <!-- Grid column -->
+
+
+        </div>
+        <!-- Grid row -->
+
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center">© 2020 Copyright:
+        <a href="https://bit.ly/3a5lhjH">#BuildForSDG</a>
+      </div>
+      <!-- Copyright -->
+
+    </footer>
+    </body>
+
+    </html>
+
+
+
