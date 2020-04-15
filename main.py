@@ -2,7 +2,7 @@ from fastapi import FastAPI,Request,Form
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from estimator import *
+from src.estimator import *
 
 class COVID19(BaseModel):
     name : str = "Africa"
